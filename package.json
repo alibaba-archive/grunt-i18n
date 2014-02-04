@@ -1,7 +1,7 @@
 {
   "name": "tb.grunt-i18n",
   "description": "An i18n builder to be used under grunt.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/teambition/grunt-i18n",
   "author": {
     "name": "Qi Junyuan",
