@@ -28,21 +28,20 @@ exports.tb_grunt_i18n = {
     done();
   },
   default_options: function(test) {
-    test.expect(1);
+    test.expect(3);
 
-    var actual = grunt.file.read('tmp/default_options');
-    var expected = grunt.file.read('test/expected/default_options');
-    test.equal(actual, expected, 'should describe what the default behavior is.');
+    var actual_en = grunt.file.read('test/tmp/i18n/en/test.js');
+    var actual_zh = grunt.file.read('test/tmp/i18n/zh/test.js');
+    var actual_default = grunt.file.read('test/tmp//test.js');
+
+    var expected_en = grunt.file.read('test/expected/i18n/en/test.js');
+    var expected_zh = grunt.file.read('test/expected/i18n/zh/test.js');
+    var expected_default = grunt.file.read('test/expected/test.js');
+
+    test.equal(actual_en, expected_en, 'should describe what the default behavior is.');
+    test.equal(actual_zh, expected_zh, 'should describe what the default behavior is.');
+    test.equal(actual_default, expected_default, 'should describe what the default behavior is.');
 
     test.done();
-  },
-  custom_options: function(test) {
-    test.expect(1);
-
-    var actual = grunt.file.read('tmp/custom_options');
-    var expected = grunt.file.read('test/expected/custom_options');
-    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
-
-    test.done();
-  },
+  }
 };

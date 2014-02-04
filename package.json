@@ -31,15 +31,15 @@
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-nodeunit": "~0.2.0",
-    "grunt": "~0.4.2"
+    "grunt": "~0.4.2",
+    "grunt-bump": "0.0.13"
   },
   "peerDependencies": {
     "grunt": "~0.4.2"
   },
   "keywords": [
-    "gruntplugin"
-  ],
-  "dependencies": {
-    "i18n-middleware": "0.0.7"
-  }
+    "gruntplugin",
+    "i18n",
+    "teambition"
+  ]
 }

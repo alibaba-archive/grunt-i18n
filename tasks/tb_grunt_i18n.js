@@ -64,11 +64,17 @@ module.exports = function(grunt) {
           for (var i = 0; i < localeFiles.length; i++) {
             var localeName = localeFiles[i].name;
             var targetFilepath = filepath.replace(cwd, dest + 'i18n/' + localeName);
+            var originalContent = grunt.file.read(filepath);
+            var tag, value;
+            for (tag in localeFiles[i].file) {
+              value = localeFiles[i].file[tag];
+              originalContent = originalContent.replace('{{__' + tag + '}}', value);
+            }
             if (localeName === defaultLanguage) {
-              grunt.file.write(f.dest, grunt.file.read(filepath));
+              grunt.file.write(f.dest, originalContent);
               grunt.log.writeln('File "' + f.dest + '" created.');
             }
-            grunt.file.write(targetFilepath, grunt.file.read(filepath));
+            grunt.file.write(targetFilepath, originalContent);
             grunt.log.writeln('File "' + targetFilepath + '" created.');
           }
         });
