@@ -66,11 +66,9 @@ module.exports = function(grunt) {
             var targetFilepath = filepath.replace(cwd, dest + 'i18n/' + localeName);
             var originalContent = grunt.file.read(filepath);
             var tag, value, regex;
-            for (tag in localeFiles[i].file) {
-              value = localeFiles[i].file[tag];
-              regex = new RegExp('\\{\\{__' + tag + '\\}\\}', 'g');
-              originalContent = originalContent.replace(regex, value);
-            }
+            originalContent = originalContent.replace(/\{\{__([\s\S]+?)\}\}/g, function(m, grep) {
+              return localeFiles[i].file[grep] ? localeFiles[i].file[grep] : ''
+            })
             if (localeName === defaultLanguage) {
               grunt.file.write(f.dest, originalContent);
               grunt.log.writeln('File "' + f.dest + '" created.');
