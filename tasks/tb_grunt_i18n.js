@@ -65,7 +65,6 @@ module.exports = function(grunt) {
             var localeName = localeFiles[i].name;
             var targetFilepath = filepath.replace(cwd, dest + 'i18n/' + localeName);
             var originalContent = grunt.file.read(filepath);
-            var tag, value, regex;
             originalContent = originalContent.replace(/\{\{__([\s\S]+?)\}\}/g, function(m, grep) {
               return localeFiles[i].file[grep] ? localeFiles[i].file[grep] : ''
             })
