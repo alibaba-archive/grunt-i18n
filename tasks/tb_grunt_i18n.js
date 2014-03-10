@@ -65,10 +65,11 @@ module.exports = function(grunt) {
             var localeName = localeFiles[i].name;
             var targetFilepath = filepath.replace(cwd, dest + 'i18n/' + localeName);
             var originalContent = grunt.file.read(filepath);
-            var tag, value;
+            var tag, value, regex;
             for (tag in localeFiles[i].file) {
               value = localeFiles[i].file[tag];
-              originalContent = originalContent.replace('{{__' + tag + '}}', value);
+              regex = new RegExp('\\{\\{__' + tag + '\\}\\}', 'g');
+              originalContent = originalContent.replace(regex, value);
             }
             if (localeName === defaultLanguage) {
               grunt.file.write(f.dest, originalContent);
