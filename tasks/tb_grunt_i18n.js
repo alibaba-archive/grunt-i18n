@@ -7,6 +7,8 @@
  */
 
 'use strict';
+var _ = require('underscore');
+var path = require('path');
 
 module.exports = function(grunt) {
 
@@ -27,12 +29,33 @@ module.exports = function(grunt) {
       grunt.log.warn('Locales path is not valid');
     }
 
+    function readDict(lang, dictPath) {
+      if (dictPath) {
+        dictPath = path.join(process.cwd(), dictPath);
+        dictPath = path.join(dictPath, lang + '.json');
+      }
+      console.log(dictPath);
+      var dict = grunt.file.readJSON(dictPath);
+      var key, dp;
+      for (key in dict) {
+        if (dict.hasOwnProperty(key)) {
+          if (key === '@include') {
+            console.log(dict[key])
+            for (var i = 0; i < dict[key].length; i++) {
+              dict = _.extend(dict, readDict(lang, dict[key][i]));
+            }
+          }
+        }
+      }
+      return dict;
+    }
+
     grunt.file.recurse(localesPath, function(abspath, rootdir, subdir, filename){
       var localeName = filename.split('.')[0];
       if (grunt.file.exists(abspath)) {
         var localeFile = {
           name: localeName,
-          file: grunt.file.readJSON(abspath)
+          file: readDict(localeName, localesPath)
         };
         localeFiles.push(localeFile);
         grunt.file.mkdir(dest + 'i18n');
@@ -66,8 +89,8 @@ module.exports = function(grunt) {
             var targetFilepath = filepath.replace(cwd, dest + 'i18n/' + localeName);
             var originalContent = grunt.file.read(filepath);
             originalContent = originalContent.replace(/\{\{__([\s\S]+?)\}\}/g, function(m, grep) {
-              return localeFiles[i].file[grep] ? localeFiles[i].file[grep] : ''
-            })
+              return localeFiles[i].file[grep] ? localeFiles[i].file[grep] : '';
+            });
             if (localeName === defaultLanguage) {
               grunt.file.write(f.dest, originalContent);
               grunt.log.writeln('File "' + f.dest + '" created.');
@@ -82,3 +105,4 @@ module.exports = function(grunt) {
   });
 
 };
+

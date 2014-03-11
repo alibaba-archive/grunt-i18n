@@ -41,5 +41,8 @@
     "gruntplugin",
     "i18n",
     "teambition"
-  ]
+  ],
+  "dependencies": {
+    "underscore": "~1.6.0"
+  }
 }

@@ -1,3 +1,6 @@
 {
+  "@include": [
+    "./test/locales"
+  ],
   "hello": "你好"
 }

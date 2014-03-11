@@ -31,6 +31,10 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     tb_grunt_i18n: {
       default_options: {
+        options: {
+          lang:'en',
+          localesPath: 'test/raw/locales'
+        },
         expand: true,
         cwd: 'test/raw',
         src: ['**/*'],
@@ -75,6 +79,6 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['clean', 'tb_grunt_i18n', 'nodeunit']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'test']);
+  grunt.registerTask('default', ['test']);
 
 };
