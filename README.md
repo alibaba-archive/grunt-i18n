@@ -57,10 +57,22 @@ In this example, the default options are used to do something with whatever. So 
 ```js
 grunt.initConfig({
   tb_grunt_i18n: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    build: {
+      options: {
+        localesPath: 'src/locales',
+        dest: 'build/temp',
+        cwd: 'src'
+      },
+      files: [
+        {
+          src: [
+            'src/apps/**/*.{less,html,coffee}',
+            'src/components/**/*.{less,html,coffee}',
+            'src/lib/**/*.{less,html,coffee}'
+          ]
+        }
+      ]
+    }
   },
 });
 ```

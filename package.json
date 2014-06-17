@@ -1,7 +1,7 @@
 {
   "name": "tb.grunt-i18n",
   "description": "An i18n builder to be used under grunt.",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "homepage": "https://github.com/teambition/grunt-i18n",
   "author": {
     "name": "Qi Junyuan",
@@ -31,8 +31,7 @@
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-nodeunit": "~0.2.0",
-    "grunt": "~0.4.2",
-    "grunt-bump": "0.0.13"
+    "grunt": "~0.4.2"
   },
   "peerDependencies": {
     "grunt": "~0.4.2"
